@@ -11,15 +11,18 @@ class Report(models.Model):
     file = models.FileField()
     begins = models.DateField(verbose_name=_('Begins at'))
     ends = models.DateField(verbose_name=_('Ends at'))
+    section = models.ForeignKey('Section', related_name='reports')
     index = models.SmallIntegerField()
 
 
 class Section(models.Model):
     title = models.CharField(max_length=20)
     slug = models.SlugField()
-    reports = models.ForeignKey(Report)
+    master = models.ForeignKey(Person)
     begins = models.DateField(verbose_name=_('Begins at'))
     ends = models.DateField(verbose_name=_('Ends at'))
+    conf = models.ForeignKey('Conference', related_name='shedule')
+    index = models.SmallIntegerField()
 
 
 class Conference(models.Model):
@@ -27,7 +30,6 @@ class Conference(models.Model):
     ends = models.DateField(verbose_name=_('Ends at'))
     place = models.ForeignKey(CorpObject, verbose_name=_('Place'))
     orgs = models.ManyToManyField(Person, verbose_name=_('Managers'))
-    schedule = models.ForeignKey(Section, verbose_name=_('Shedule'))
     thesis_rules = models.TextField(verbose_name=_('Thesis Rules'))
 
     def get_absolute_url(self):

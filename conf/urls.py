@@ -5,6 +5,8 @@ from . import views, api
 
 router = DefaultRouter()
 router.register(r'report', api.ReportViewset)
+router.register(r'section', api.SectionViewSet)
+router.register(r'conf', api.ConfViewset)
 
 urlpatterns = patterns('',
     url(r'^$', views.ConfIndex.as_view(), name='conf_index'),
