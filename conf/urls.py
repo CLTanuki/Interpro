@@ -1,19 +1,19 @@
 __author__ = 'cltanuki'
 from django.conf.urls import patterns, include, url
-from django.conf.urls.i18n import i18n_patterns
-from erp.enterprise.views import Register
-from . import views
+from rest_framework.routers import DefaultRouter
+from . import views, api
 
-item_patterns = patterns('',
-    url(r'^/$', views.ConfMain.as_view(), name='conf_main'),
-    url(r'^/register$', Register.as_view(template_name='conf/register.html'), name='conf_main'),
-)
+router = DefaultRouter()
+router.register(r'report', api.ReportViewset)
 
 urlpatterns = patterns('',
+    url(r'^$', views.ConfIndex.as_view(), name='conf_index'),
     url(r'^(?P<slug>.+)/$', views.ConfMain.as_view(), name='conf_main'),
-    url(r'^(?P<slug>.+)/', include(item_patterns)),
+    # url(r'^(?P<slug>.+)/', include(item_patterns)),
 )
 # urlpatterns += i18n_patterns('',
 #     url(_(r'^about/$'), about_views.main, name='about'),
 #     url(_(r'^news/'), include(news_patterns, namespace='news')),
 # )
+
+urlpatterns += router.urls

@@ -1,19 +1,18 @@
 from django.shortcuts import render
 from erp.planning.models import Project
-from django.views.generic import DetailView, View, ListView
+from django.views.generic import DetailView, View, ListView, TemplateView
 import logging
 logger = logging.getLogger(__name__)
 
 
-class ConfIndex(View):
+class ConfIndex(TemplateView):
 
-    def get(self, request, *args, **kwargs):
-        pass
+    template_name = 'conf/index.html'
 
 
 class ConfMain(DetailView):
     model = Project
-    template_name = 'conf/index.html'
+    # template_name = 'conf/index.html'
 
     def get_context_data(self, **kwargs):
         context = super(ConfMain, self).get_context_data(**kwargs)

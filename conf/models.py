@@ -4,19 +4,20 @@ from erp.enterprise.models import CorpObject
 from erp.directory.models import Person
 
 
-class Reports(models.Model):
+class Report(models.Model):
     title = models.CharField(max_length=20)
     slug = models.SlugField()
     reporter = models.ForeignKey(Person)
     file = models.FileField()
     begins = models.DateField(verbose_name=_('Begins at'))
     ends = models.DateField(verbose_name=_('Ends at'))
+    index = models.SmallIntegerField()
 
 
 class Section(models.Model):
     title = models.CharField(max_length=20)
     slug = models.SlugField()
-    reports = models.ForeignKey(Reports)
+    reports = models.ForeignKey(Report)
     begins = models.DateField(verbose_name=_('Begins at'))
     ends = models.DateField(verbose_name=_('Ends at'))
 
@@ -26,9 +27,8 @@ class Conference(models.Model):
     ends = models.DateField(verbose_name=_('Ends at'))
     place = models.ForeignKey(CorpObject, verbose_name=_('Place'))
     orgs = models.ManyToManyField(Person, verbose_name=_('Managers'))
-    schedule = models.TextField(verbose_name=_('Shedule'))
+    schedule = models.ForeignKey(Section, verbose_name=_('Shedule'))
     thesis_rules = models.TextField(verbose_name=_('Thesis Rules'))
-    sections = models.ForeignKey(Section)
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
