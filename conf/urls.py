@@ -10,7 +10,7 @@ router.register(r'conf', api.ConfViewset)
 
 urlpatterns = patterns('',
     url(r'^$', views.ConfIndex.as_view(), name='conf_index'),
-    url(r'^(?P<slug>.+)/$', views.ConfMain.as_view(), name='conf_main'),
+    # url(r'^(?P<slug>.+)/$', views.ConfMain.as_view(), name='conf_main'),
     # url(r'^(?P<slug>.+)/', include(item_patterns)),
 )
 # urlpatterns += i18n_patterns('',
