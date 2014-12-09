@@ -21,6 +21,7 @@ class SectionSerializer(serializers.HyperlinkedModelSerializer):
 
 class ConfDataSerializer(serializers.HyperlinkedModelSerializer):
     schedule = SectionSerializer(many=True)
+    place = serializers.HyperlinkedIdentityField(view_name='obj-detail')
 
     class Meta:
         model = models.Conference

@@ -19,4 +19,9 @@ class SectionViewSet(viewsets.ModelViewSet):
 class ConfViewset(viewsets.ModelViewSet):
 
     serializer_class = serializers.ConfSerializer
-    queryset = Project.objects.filter(item_type_id=17)
+    queryset = Project.objects.filter(item_type_id=22)
+
+    def retrieve(self, request, *args, **kwargs):
+        self.serializer_class = serializers.ConfDataSerializer
+        self.queryset = models.Conference.objects.all()
+        return super(ConfViewset, self).retrieve(request, *args, **kwargs)
