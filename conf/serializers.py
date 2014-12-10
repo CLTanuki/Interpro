@@ -25,10 +25,11 @@ class ConfDataSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Conference
-        fields = ('begins', 'ends', 'place', 'orgs', 'thesis_rules', 'schedule')
+        fields = ('begins', 'ends', 'orgs', 'thesis_rules', 'schedule')
 
 
-class ConfSerializer(serializers.ModelSerializer):
+class ConferenceSerializer(serializers.ModelSerializer):
+    data = serializers.RelatedField()
 
     class Meta:
         model = Project

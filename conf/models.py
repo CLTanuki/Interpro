@@ -21,7 +21,7 @@ class Section(models.Model):
     master = models.ForeignKey(Person)
     begins = models.DateField(verbose_name=_('Begins at'))
     ends = models.DateField(verbose_name=_('Ends at'))
-    conf = models.ForeignKey('Conference', related_name='shedule')
+    conf = models.ForeignKey('Conference', related_name='schedule')
     index = models.SmallIntegerField()
 
 
@@ -35,3 +35,8 @@ class Conference(models.Model):
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('prj_item', args=[str(self.slug)])
+
+    @property
+    def serializer(self):
+        from .serializers import ConferenceSerializer
+        return ConferenceSerializer

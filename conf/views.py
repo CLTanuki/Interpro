@@ -18,3 +18,5 @@ class ConfMain(DetailView):
         context = super(ConfMain, self).get_context_data(**kwargs)
         context['confs'] = Project.objects.filter(item_type_id=17).values()#  .filter(status=1)
         return context
+
+
